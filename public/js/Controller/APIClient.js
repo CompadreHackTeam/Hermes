@@ -1,17 +1,15 @@
 /**
  * Created by pedro on 10/03/17.
  */
-
-var clientDataURL = "/getClientData/'";
+var baseURL = "http://hack4good17.cloudapp.net:8585";
+var clientDataURL = "/getClientData/";
 
 function fetchClientData(clientId) {
-    console.log("nice try");
-    applicationAjaxRetriever(clientId);
+    getClientAjaxRetriever(clientId);
 
 }
-
-function applicationAjaxRetriever(idClient){
-    var url=clientDataURL + idClient;
+function getClientAjaxRetriever(idClient){
+    var url =baseURL + clientDataURL + idClient;
     var promise = ajaxCaller(url);
     proccessAjaxResponse(promise);
 }
@@ -23,6 +21,7 @@ function applicationAjaxRetriever(idClient){
  */
 function ajaxCaller(url){
     var data = {}
+    console.log("ajaxCaller url:" + url);
     data["query"] = $("#query").val();
     return $.ajax({
         type : "GET",
@@ -40,9 +39,3 @@ function ajaxCaller(url){
  * @param promise
  */
 
-function proccessAjaxResponse(promise){
-
-    promise.success(function (data){
-        console.log(data);
-    });
-}

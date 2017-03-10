@@ -1,20 +1,34 @@
 /**
  * Created by pedro on 10/03/17.
  */
+
+var eppcLocation = {lat: 39.4790059, lng: -6.3429654};
+
+
 function initMap () {
-    var uluru = {lat: 39.4790059, lng: -6.3429654};
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 17,
-        center: uluru
+        center: eppcLocation
     });
     var marker = new google.maps.Marker({
-        position: uluru,
+        position: eppcLocation,
         map: map
     });
 };
 
-function updateMapWithNewData(data){
+function updateMapWithNewData(data , position){
 
+    var markerPosition = position;//{lat: 39.4790059, lng: -6.3429654};
+
+    var marker = new google.maps.Marker({
+        position: uluru,
+        map: map
+    });
 }
+
+function getEpccLocation(){
+    return eppcLocation;
+}
+
 
 
