@@ -1,5 +1,4 @@
-
-$("a[href=#chartTab]").click(function() {
+$(document).ready(function() {
     fetchClientData("epcc");
 });
 
@@ -7,7 +6,7 @@ $("a[href=#chartTab]").click(function() {
 function proccessAjaxResponse(promise){
 
     promise.success(function (data){
-        console.log("PROMISED: " + data);
+        //console.log("PROMISED: " + data);
         //populateMorrisLine();
     });
 }

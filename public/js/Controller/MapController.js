@@ -3,10 +3,11 @@
  */
 
 var eppcLocation = {lat: 39.4790059, lng: -6.3429654};
-
+var customIcon = "./resources/nicholagity/minicholas.gif";
+var map;
 
 function initMap () {
-    var map = new google.maps.Map(document.getElementById('myMap'), {
+    map = new google.maps.Map(document.getElementById('myMap'), {
         zoom: 17,
         center: eppcLocation
     });
@@ -16,13 +17,18 @@ function initMap () {
     });
 };
 
-function updateMapWithNewData(data , position){
+function updateMapWithNewData(data , destinationPoint){
+    var markerPosition = new google.maps.LatLng(destinationPoint.lat, destinationPoint.lng);
+    console.log("POSTMERLIN: " + destinationPoint.lat + "    lng:" + destinationPoint.lng);
 
-    var markerPosition = position;//{lat: 39.4790059, lng: -6.3429654};
+    //console.log("GEN<ERATING NEW MARKER AT: " + markerPosition.lat  +"   long:  " + markerPosition.lng);
 
     var marker = new google.maps.Marker({
-        position: eppcLocation,
-        map: myMap
+        position: markerPosition,
+        icon: customIcon,
+        map: map,
+        optimized:false, // <-- required for animated gif
+        animation: google.maps.Animation.DROP
     });
 }
 
