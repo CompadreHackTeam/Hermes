@@ -47,6 +47,8 @@ controller.route('/storePacket')
     .post(packetController.storePacket);
 controller.route('/getClientData/:clientId')
     .get(packetController.returnPackets);
+controller.route('/getClientDataParametrized/:clientId/:startHour?/:finishHour?/:radius?')
+    .get(packetController.returnPacketsParametrized);
 
 /** Clients routes */
 controller.route('/registerClient')

@@ -47,3 +47,31 @@ exports.findClientPackets = function(clientId, callback){
             callback(null, obj);
     }).select('-_id -__v'); /* Remove the _id and __v fields from the object */
 };
+
+exports.findClientPacketsDate = function(collectionName, startHour, finishHour, callback){
+
+    var clientCollection = mongoose.model(collectionName, PacketSchema);
+    clientCollection.find({date : {
+                                '$gte': startHour,
+                                '$lt': finishHour }
+    }, function(err, obj){
+        if(err != null)
+            callback(err, null);
+        else
+            callback(null, obj);
+    }).select('-_id -__v'); /* Remove the _id and __v fields from the object */
+};
+
+exports.findClientPacketsDateRadius = function(collectionName, startHour, finishHour, radius, callback){
+
+    var clientCollection = mongoose.model(collectionName, PacketSchema);
+    clientCollection.find({
+            date: {'$gte': startHour,
+                    '$lt': finishHour},
+            distance : {'$lt': radius}}, function(err, obj){
+        if(err != null)
+            callback(err, null);
+        else
+            callback(null, obj);
+    }).select('-_id -__v'); /* Remove the _id and __v fields from the object */
+};

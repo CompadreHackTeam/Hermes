@@ -54,4 +54,47 @@ exports.returnPackets = function (req, res){
         }
     });
 
-}
+};
+
+/**
+ * Returns the packets of a client filtered by multiple optional params.
+ * @params
+ *  - clientId
+ *  - startHour, HH/MM/SS
+ *  - finishHour,HH/MM/SS
+ *  - radius
+ * @param res
+ */
+exports.returnPacketsParametrized = function (req, res){
+
+    var collectionName = 'client' + req.params.clientId;
+    var params = req.params;
+
+    // Day & startHour
+    if(params.startHour != null && params.finishHour != null && params.radius == null){
+        console.log("startHour" + params.startHour);
+        packetRepository.findClientPacketsDate(collectionName, params.startHour, params.finishHour, function(err, packets) {
+            if (err != null) {
+                res.writeHead(400, {'content-type': 'text/plain'});
+                res.write("Error: " + err);
+                res.end();
+            } else {
+                res.send(packets);
+            }
+        });
+    }else{
+        // Day & startHour & finishHour & radius
+        if(params.startHour != null && params.finishHour != null && params.radius != null){
+            console.log("startHour " + params.startHour + " finishHour " + params.finishHour + " radius " + params.radius);
+            packetRepository.findClientPacketsDateRadius(collectionName, params.startHour, params.finishHour, params.radius, function(err, packets) {
+                if (err != null) {
+                    res.writeHead(400, {'content-type': 'text/plain'});
+                    res.write("Error: " + err);
+                    res.end();
+                } else {
+                    res.send(packets);
+                }
+            });
+        }
+    }
+};

@@ -14,7 +14,7 @@ module.exports = new Schema({
     clientId    :String,
     frequency   :String,
     signal      :String,
-    distance    :String,
+    distance    :Number,
     mac         :String,
     date        :Date
 });
