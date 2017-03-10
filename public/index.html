@@ -1,0 +1,22 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8">
+  <title>My Aplicación con Sockets</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+  <script>
+	var socket = io.connect('localhost:3000', { 'forceNew': true });
+
+	socket.on('packet', function(data) {  
+	  console.log(data);
+	});
+
+  </script>
+</head>  
+<body>  
+  <h1>My App</h1>
+  <div id="messages"></div>
+  <br/>
+
+</body>  
+</html>  
