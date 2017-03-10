@@ -1,22 +1,114 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <title>Tabbed Content using Bootstrap</title>
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABTRFasndmwlrl8W7K7UBtntUewqsniHU&callback=initMap">
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
   <meta charset="UTF-8">
   <title>My Aplicación con Sockets</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
-  <script>
-	var socket = io.connect('localhost:3000', { 'forceNew': true });
 
-	socket.on('packet', function(data) {  
-	  console.log(data);
-	});
 
-  </script>
-</head>  
-<body>  
-  <h1>My App</h1>
-  <div id="messages"></div>
-  <br/>
+</head>
 
-</body>  
-</html>  
+<meta charset="utf-8">
+<style>
+
+  rect{
+    fill: white;
+  }
+
+  circle {
+    stroke: #000;
+    stroke-opacity: .5;
+  }
+
+</style>
+<body>
+      <div class="col-md-12 no padding">
+        <div class="panel with-nav-tabs panel-success">
+          <div class="panel-heading">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab1success" data-toggle="tab">Ahora</a></li>
+              <li><a href="#tab2success" data-toggle="tab">Histórico</a></li>
+            </ul>
+          </div>
+          <div class="panel-body">
+            <div class="tab-content">
+              <div class="tab-pane fade in active" id="tab1success">
+                <div id="map"></div>
+              </div>
+              <div class="tab-pane fade" id="tab2success">
+                <div id="myLineChart" style="height: 250px;"></div>
+                aquí irán gráficas u hostias asín
+
+                <script>
+
+                 new Morris.Line({
+
+                    element: 'myLineChart',
+
+                    data: [
+                      { year: '2008', value: 20 },
+                      { year: '2009', value: 10 },
+                      { year: '2010', value: 5 },
+                      { year: '2011', value: 5 },
+                      { year: '2012', value: 20 }
+                    ],
+
+                    xkey: 'year',
+
+                    ykeys: ['value'],
+
+                    labels: ['Value']
+                  });
+
+                </script>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <script src="./js/Socket.js"></script>
+      <script src="./js/Controller/BubleTemp.js"></script>
+      <script src="./js/Controller/MapController.js"></script>
+      <script src="./js/Controller/PacketController.js"></script>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
