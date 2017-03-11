@@ -37,7 +37,7 @@ function inflateBarCharView(jsonList) {
     jsonList.forEach(function (object) {
 
         dataindex.push(object.fhour);
-        datapoint.push(object.clients);
+        datapoint.push((object.clients / 2).toFixed(2));
     });
 
 
@@ -45,7 +45,6 @@ function inflateBarCharView(jsonList) {
         labels: dataindex,
         datasets: [
             {
-                label: "Prime and Fibonacci",
                 fillColor: "rgba(76,175,80,0.2)",
                 strokeColor: "rgba(220,220,220,1)",
                 pointColor: "rgba(220,220,220,1)",
@@ -69,8 +68,10 @@ function inflateLineDataView(jsonList) {
 
     jsonList.forEach(function (object) {
 
-        dataindex.push(object.date);
-        datapoint.push(object.distance);
+        var localDate = new Date(object.date);
+        var formatDate = getWellTime(localDate);
+        dataindex.push(formatDate);
+        datapoint.push(parseInt(object.distance));
     });
 
 
@@ -78,7 +79,6 @@ function inflateLineDataView(jsonList) {
         labels: dataindex,
         datasets: [
             {
-                label: "Prime and Fibonacci",
                 fillColor: "rgba(76,175,80,0.2)",
                 strokeColor: "rgba(220,220,220,1)",
                 pointColor: "rgba(220,220,220,1)",
@@ -94,4 +94,13 @@ function inflateLineDataView(jsonList) {
     var options = {};
     var lineChart = new Chart(ctx).Line(lineData, options);
 
+}
+
+/**
+ * @return {string}
+ */
+function getWellTime(date) {
+    var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    return hours + ":" + minutes;
 }

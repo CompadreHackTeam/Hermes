@@ -10,7 +10,7 @@ function getEpccLoc(){
 
 function updateMap(item){
 
-    if(item.distance < 125){
+    if(item.distance < 40){
         if(getMarkersMap()[item.mac] == undefined){
             var destinationPoint = calculatePosition(item.distance);
             updateMapWithNewData(item, destinationPoint);
