@@ -3,7 +3,7 @@
  */
 
 var eppcLocation = {lat: 39.4790059, lng: -6.3429654};
-var customIcon = "./resources/nicholagity/minicholas.gif";
+var customIcon = "./images/pin.png";
 var map;
 var markers = [];
 var markerId = 0;
