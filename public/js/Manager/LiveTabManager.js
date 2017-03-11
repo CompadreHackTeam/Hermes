@@ -10,11 +10,27 @@ function getEpccLoc(){
 function updateMap(item){
 
     if(item.distance < 150){
-        var destinationPoint = calculatePosition(item.distance);
-        updateMapWithNewData(item, destinationPoint);
+        if(getMarkersMap()[item.mac] == undefined){
+            console.log("Mac: " + item.mac + " painted.");
+            var destinationPoint = calculatePosition(item.distance);
+            console.log("Destination point: " + destinationPoint.lat + "   " + destinationPoint.lng);
+            updateMapWithNewData(item, destinationPoint);
+        }else{
+            console.log("Mac: " + item.mac + " not painted.");
+            getMarkersMap()[item.mac] = item.distance;
+            getMarkersArray().forEach(function (storedMarker) {
+                console.log(storedMarker.id)
+               if(storedMarker.id == item.mac){
+                   console.log("Mac: " + item.id + " removed.");
+                   storedMarker.setMap(null);
+                   getMarkersMap()[item.mac] = null;
+               }
+            });
+            updateMap(item);
+        }
     }
     else{
-        //eliminar
+        console.log("out of range");
     }
 }
 
@@ -23,7 +39,6 @@ function calculatePosition(distance){
 
     var pointA = epccLoc;
     var radiusInKm = distance;
-    console.log("RADIUS: " + radiusInKm);
 
     var pointB = destVincenty(pointA.lat, pointA.lng, getRandomInt(1, 360), radiusInKm);
 
