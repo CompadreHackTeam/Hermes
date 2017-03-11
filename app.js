@@ -49,6 +49,8 @@ controller.route('/getClientData/:clientId')
     .get(packetController.returnPackets);
 controller.route('/getClientDataParametrized/:clientId/:startHour?/:finishHour?/:radius?')
     .get(packetController.returnPacketsParametrized);
+controller.route('/getPacketsByDate/:clientId/:date')
+    .get(packetController.returnPacketsByDate);
 
 /** Clients routes */
 controller.route('/registerClient')

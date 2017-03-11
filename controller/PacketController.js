@@ -98,3 +98,17 @@ exports.returnPacketsParametrized = function (req, res){
         }
     }
 };
+
+exports.returnPacketsByDate = function(req, res){
+    var collectionName = 'client' + req.params.clientId;
+    var date = req.params.date;
+    packetRepository.findPacketsByDate(collectionName, date, function(err, packets){
+        if (err != null) {
+            res.writeHead(400, {'content-type': 'text/plain'});
+            res.write("Error: " + err);
+            res.end();
+        } else {
+            res.send(packets);
+        }
+    })
+};
