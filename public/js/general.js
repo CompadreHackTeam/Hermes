@@ -7,19 +7,62 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'GET',
-        //url: 'http://hack4good17.cloudapp.net:8585/api/getClientData/epcc',
-        url: 'http://hack4good17.cloudapp.net:8585/api/getClientDataParametrized/epcc/2017-03-10T22:12:50.127Z/2017-03-10T22:17:50.127Z/100',
+        url: 'http://hack4good17.cloudapp.net:8585/api/getClientDataParametrized/epcc/2017-03-10T22:12:50.127Z/2017-03-10T22:13:50.127Z/100',
         data: (jsonList),
         dataType: 'json',
         success: function (jsonList) {
-            inflateDataView(jsonList);
+            inflateLineDataView(jsonList);
+        }
+    });
+
+    $.ajax({
+        type: 'GET',
+        url: 'http://hack4good17.cloudapp.net:8585/api/getPacketsByDate/epcc/2017-03-11T00:00:00.000Z',
+        data: (jsonList),
+        dataType: 'json',
+        success: function (jsonList) {
+            inflateBarCharView(jsonList);
         }
     });
 
 
 });
 
-function inflateDataView(jsonList) {
+
+function inflateBarCharView(jsonList) {
+
+    var dataindex = [];
+    var datapoint = [];
+
+    jsonList.forEach(function (object) {
+
+        dataindex.push(object.fhour);
+        datapoint.push(object.clients);
+    });
+
+
+    var lineData = {
+        labels: dataindex,
+        datasets: [
+            {
+                label: "Prime and Fibonacci",
+                fillColor: "rgba(76,175,80,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: datapoint
+            }
+        ]
+    };
+
+    var ctx = document.getElementById("barChart").getContext("2d");
+    var options = {};
+    var barChart = new Chart(ctx).Line(lineData, options);
+}
+
+function inflateLineDataView(jsonList) {
 
     var dataindex = [];
     var datapoint = [];
