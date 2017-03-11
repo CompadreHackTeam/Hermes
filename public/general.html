@@ -20,6 +20,7 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+
     </head>
     <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
@@ -68,6 +69,7 @@
                 <!-- Main content -->
                 <section class="main-content">
 
+                    <div id="myLineChart" style="height: 250px;"></div>
 
                 </section>
 
@@ -76,6 +78,7 @@
 
 
         <!-- jQuery 2.0.2 -->
+
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script src="js/jquery.min.js" type="text/javascript"></script>
 
@@ -83,5 +86,10 @@
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <!-- Director App -->
         <script src="js/Director/app.js" type="text/javascript"></script>
+        <script src="./js/Controller/APIClient.js"></script>
+        <script src="./js/Manager/LiveTabManager.js"></script>
+        <script src="./js/Manager/ChartTabManager.js"></script>
+        <script src="./js/Controller/PacketController.js"></script>
+
     </body>
 </html>

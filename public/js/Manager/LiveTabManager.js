@@ -9,10 +9,13 @@ function getEpccLoc(){
 
 function updateMap(item){
 
-    console.log("UPDATED");
-
-    var destinationPoint = calculatePosition(item.distance);
-    updateMapWithNewData(item, destinationPoint);
+    if(item.distance < 150){
+        var destinationPoint = calculatePosition(item.distance);
+        updateMapWithNewData(item, destinationPoint);
+    }
+    else{
+        //eliminar
+    }
 }
 
 function calculatePosition(distance){
@@ -20,7 +23,8 @@ function calculatePosition(distance){
 
     var pointA = epccLoc;
     var radiusInKm = distance;
-    console.log("PREMERLIN : " + pointA.lat + "    lng:" + pointA.lng);
+    console.log("RADIUS: " + radiusInKm);
+
     var pointB = destVincenty(pointA.lat, pointA.lng, getRandomInt(1, 360), radiusInKm);
 
    return pointB;
