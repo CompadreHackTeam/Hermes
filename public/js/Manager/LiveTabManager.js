@@ -1,7 +1,8 @@
 /**
  * Created by pedro on 10/03/17.
  */
-var eppcLocation = {lat: 39.4790059, lng: -6.3429654};
+
+var eppcLocation = {lat:39.479004, lng: -6.342624};
 
 function getEpccLoc(){
     return eppcLocation;
@@ -9,19 +10,14 @@ function getEpccLoc(){
 
 function updateMap(item){
 
-    if(item.distance < 150){
+    if(item.distance < 125){
         if(getMarkersMap()[item.mac] == undefined){
-            console.log("Mac: " + item.mac + " painted.");
             var destinationPoint = calculatePosition(item.distance);
-            console.log("Destination point: " + destinationPoint.lat + "   " + destinationPoint.lng);
             updateMapWithNewData(item, destinationPoint);
         }else{
-            console.log("Mac: " + item.mac + " not painted.");
             getMarkersMap()[item.mac] = item.distance;
             getMarkersArray().forEach(function (storedMarker) {
-                console.log(storedMarker.id)
                if(storedMarker.id == item.mac){
-                   console.log("Mac: " + item.id + " removed.");
                    storedMarker.setMap(null);
                    getMarkersMap()[item.mac] = null;
                }
@@ -30,7 +26,10 @@ function updateMap(item){
         }
     }
     else{
-        console.log("out of range");
+        if(storedMarker.id == item.mac){
+            storedMarker.setMap(null);
+            getMarkersMap()[item.mac] = null;
+        }
     }
 }
 

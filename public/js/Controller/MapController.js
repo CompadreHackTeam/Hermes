@@ -3,16 +3,13 @@
  */
 
 
-
-var eppcLocation = {lat: 39.4790059, lng: -6.3429654};
-var customIcon = "./resources/antenna.svg";
+var customIcon = "./resources/lightHouse2.png";
 var map;
 var markers = {};
 var mapMarkers = [];
 var markerId = 0;
 
 $( document ).ready(function() {
-    console.log("sdfsd");
 
     var icon = {
         url: customIcon,
@@ -21,24 +18,13 @@ $( document ).ready(function() {
     };
 
     map = new google.maps.Map(document.getElementById('myMap'), {
-        zoom: 17,
-        icon: icon,
+        zoom: 20,
         center: getEpccLoc()
     });
 
-    /*var marker = new RichMarker({
-        map: map,
-        position:getEpccLoc(),
-        draggable: true,
-        flat: true,
-        anchor: RichMarkerPosition.MIDDLE,
-        content: '<div class="pin"></div><div class="pin-effect"></div>'
-    });*/
-    //timer = setInterval("setPos()",1000);
-
-
     var marker = new google.maps.Marker({
         position: getEpccLoc(),
+        icon: icon,
         map: map
     });
 });
@@ -54,7 +40,6 @@ function updateMapWithNewData(data , destinationPoint){
         animation: google.maps.Animation.DROP
     });*/
 
-    console.log("google marker: " + markerPosition);
 
     marker = new RichMarker({
         map: map,
@@ -76,7 +61,6 @@ function updateMapWithNewData(data , destinationPoint){
     markers[data.mac] = data.distance;
     marker.id = data.mac;
     mapMarkers.push(marker);
-    console.log("marker: " + marker.id + " stored");
 }
 
 function deleteMarker(id) {
@@ -104,7 +88,6 @@ function getMarkersArray(){
 
 function setPos() {
     // console.log("index " + index);
-    console.log(marker);
     if (index < positions_length){
         var latlng = new google.maps.LatLng(positions[index].lat, positions[index].lng);
         marker.setPosition(latlng);
