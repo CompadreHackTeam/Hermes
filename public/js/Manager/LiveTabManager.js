@@ -1,7 +1,8 @@
 /**
  * Created by pedro on 10/03/17.
  */
-var eppcLocation = {lat: 39.4790059, lng: -6.3429654};
+
+var eppcLocation = {lat:39.479004, lng: -6.342624};
 
 function getEpccLoc(){
     return eppcLocation;
@@ -9,12 +10,26 @@ function getEpccLoc(){
 
 function updateMap(item){
 
-    if(item.distance < 150){
-        var destinationPoint = calculatePosition(item.distance);
-        updateMapWithNewData(item, destinationPoint);
+    if(item.distance < 125){
+        if(getMarkersMap()[item.mac] == undefined){
+            var destinationPoint = calculatePosition(item.distance);
+            updateMapWithNewData(item, destinationPoint);
+        }else{
+            getMarkersMap()[item.mac] = item.distance;
+            getMarkersArray().forEach(function (storedMarker) {
+               if(storedMarker.id == item.mac){
+                   storedMarker.setMap(null);
+                   getMarkersMap()[item.mac] = null;
+               }
+            });
+            updateMap(item);
+        }
     }
     else{
-        //eliminar
+        if(storedMarker.id == item.mac){
+            storedMarker.setMap(null);
+            getMarkersMap()[item.mac] = null;
+        }
     }
 }
 
@@ -23,7 +38,6 @@ function calculatePosition(distance){
 
     var pointA = epccLoc;
     var radiusInKm = distance;
-    console.log("RADIUS: " + radiusInKm);
 
     var pointB = destVincenty(pointA.lat, pointA.lng, getRandomInt(1, 360), radiusInKm);
 
