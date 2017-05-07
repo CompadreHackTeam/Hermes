@@ -19,6 +19,7 @@ exports.savePacket = function (obj, callback) {
             signal: obj.signal,
             distance: obj.distance,
             mac: obj.mac,
+            vendor: obj.vendor,
             date: obj.date
         });
 

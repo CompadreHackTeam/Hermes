@@ -16,5 +16,6 @@ module.exports = new Schema({
     signal      :String,
     distance    :Number,
     mac         :String,
+    vendor      :String,
     date        :Date
 });
