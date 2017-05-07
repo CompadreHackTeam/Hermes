@@ -34,7 +34,8 @@ $(document).ready(function () {
 
     $('#datetimepicker1').datetimepicker({
         defaultDate: date,
-        format: 'DD/MM/YYYY'
+        format: 'DD/MM/YYYY',
+        toggleActive: true
     }).on('dp.change', function (event) {
         onNewDateSelected(new Date(event.date));
     });
