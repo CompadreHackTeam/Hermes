@@ -34,10 +34,10 @@ $(document).ready(function () {
 
     $('#datetimepicker1').datetimepicker({
         defaultDate: date,
-        format: 'DD/MM/YYYY',
-        toggleActive: true
+        format: 'DD/MM/YYYY'
     }).on('dp.change', function (event) {
-        onNewDateSelected(new Date(event.date));
+        date = new Date(event.date);
+        onNewDateSelected(date);
     });
 
 });
