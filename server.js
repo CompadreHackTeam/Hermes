@@ -35,7 +35,6 @@ app.use(controller);
 
 /** Add /api after port and before the methods of route*/
 app.use('/api', controller);
-app.use(express.static(__dirname + "/public/"));
 
 
 /****************************
